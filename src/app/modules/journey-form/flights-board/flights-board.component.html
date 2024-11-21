@@ -8,27 +8,18 @@
     <div *ngIf="!fetchingFlights && flights && flights.length > 0" class="row">
       <div class="col-3 me-3 mb-3">
         <label class="fs-5" for="origin">Currency</label>
-        <select
-          [(ngModel)]="exchangeCurrency"
-          class="form-control form-control-solid form-control-lg"
-        >
-          <option
-            *ngFor="let currency of currencies"
-            [value]="currency.key"
-            [selected]="currency.key == actualCurrency"
-            >{{ currency.name }}</option
-          >
+        <select [(ngModel)]="exchangeCurrency" class="form-control form-control-solid form-control-lg">
+          <option *ngFor="let currency of currencies" [value]="currency.key" [selected]="currency.key == actualCurrency">
+            {{ currency.name }}
+          </option>
         </select>
       </div>
     </div>
-
+  
     <div *ngFor="let journey of flights; let journeyIndex = index">
       <h4 class="mt-4">Journey {{ journeyIndex + 1 }}: {{ journey.type }}</h4>
   
-      <table
-        *ngIf="journey.flights && journey.flights.length > 0"
-        class="table table-striped shadow-sm"
-      >
+      <table *ngIf="journey.flights && journey.flights.length > 0" class="table table-striped shadow-sm">
         <thead>
           <tr>
             <th scope="col">Flight #</th>
@@ -71,7 +62,7 @@
         </thead>
       </table>
     </div>
-
+  
     <div *ngIf="!fetchingFlights && flights && flights.length === 0">
       <div class="d-flex justify-content-center align-items-center py-3">
         <div class="w-25">
@@ -80,7 +71,6 @@
       </div>
     </div>
   
-
     <div *ngIf="!fetchingFlights && !flights">
       <div class="d-flex justify-content-center align-items-center py-3">
         <div class="w-25">
@@ -88,5 +78,4 @@
         </div>
       </div>
     </div>
-  </div>
-  
+</div>

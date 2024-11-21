@@ -50,21 +50,39 @@ export class FlightsBoardComponent implements OnInit {
     });
   }
 
+  // fetchPath(): void {
+  //   this.fetchingFlights = true;
+  
+   
+  //   if (!this.origin || !this.destination) {
+  //     this.router.navigate(['..']);
+  //     return;
+  //   }
+  
+  //   this.flightsService.fetchJourneyPath(this.origin, this.destination, 'one-way')
+  //     .subscribe(response => {
+  //       this.fetchingFlights = false;
+  //       this.flights = response.journeys; 
+  //     });
+  // }
   fetchPath(): void {
     this.fetchingFlights = true;
   
-   
     if (!this.origin || !this.destination) {
       this.router.navigate(['..']);
       return;
     }
   
-    this.flightsService.fetchJourneyPath(this.origin, this.destination, 'one-way')
+    // Cambiar el tipo de viaje en la solicitud para uno o dos trayectos
+    const journeyType = this.route.snapshot.queryParams['journeyType'] || 'one-way';
+  
+    this.flightsService.fetchJourneyPath(this.origin, this.destination, journeyType)
       .subscribe(response => {
         this.fetchingFlights = false;
         this.flights = response.journeys; 
       });
   }
+
 
   exhangeCurrency(value: number): string {
     if (!this.exchangeCurrency || this.exchangeCurrency === this.actualCurrency) {
