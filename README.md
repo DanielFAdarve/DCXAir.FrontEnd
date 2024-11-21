@@ -25,7 +25,7 @@ Follow these steps to install and set up the project on your local machine:
 
 1. Clone this repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/DanielFAdarve/DCXAir.FrontEnd
 2. Navigate to the project directory:
    cd <project-directory>
 
