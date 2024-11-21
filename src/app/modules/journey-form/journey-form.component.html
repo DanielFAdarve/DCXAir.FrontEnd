@@ -1,0 +1,63 @@
+<div class="container">
+    <form [formGroup]="destinationForm">
+        <div class="row justify-content-md-center">
+            <div class="col-3 me-3">
+                <label class="fs-5" for="origin">Origin</label>
+                <input type="text" class="form-control form-control-solid form-control-lg"
+                    [ngClass]="submitted && validateFormField('origin') ? 'is-invalid' : ''"
+                    placeholder="Enter an origin" formControlName="origin" id="origin"
+                    oninput="this.value = this.value.toUpperCase().replace(/[0-9]/g, '')" minlength="3" maxlength="3"
+                    required />
+
+                <div *ngIf="validateFormField('origin')" class="">
+                    <div *ngIf="errorsFromFormField('origin')?.['required']" class="fs-6 invalid-form-feedback">Origin
+                        is
+                        required.</div>
+                    <div *ngIf="errorsFromFormField('origin')?.['minlength']" class="fs-6 invalid-form-feedback">
+                        Origin must be at least 3 characters
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <label class="fs-5" for="destination">Destination</label>
+                <input type="text" class="form-control form-control-solid form-control-lg"
+                    [ngClass]="validateFormField('destination') || (submitted && !isNotSameOrigin()) ? 'is-invalid' : ''"
+                    placeholder="Enter an destination" formControlName="destination" id="destination"
+                    oninput="this.value = this.value.toUpperCase().replace(/[0-9]/g, '')" minlength="3" maxlength="3"
+                    required />
+
+                <div *ngIf="validateFormField('destination') || (submitted && !isNotSameOrigin())">
+                    <div *ngIf="errorsFromFormField('destination')?.['required']" class="fs-6 invalid-form-feedback">
+                        Destination is required.</div>
+                    <div *ngIf="errorsFromFormField('destination')?.['minlength']" class="fs-6 invalid-form-feedback">
+                        Destination must be at least 3 characters
+                    </div>
+                    <div *ngIf="!isNotSameOrigin()" class="fs-6 invalid-form-feedback">
+                        Destination cannot be same as the origin.
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-3">
+                <label class="fs-5" for="journeyType">Journey Type</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="journeyType" value="one-way" id="oneWay">
+                    <label class="form-check-label" for="oneWay">
+                        One-way
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="journeyType" value="round-trip" id="roundTrip">
+                    <label class="form-check-label" for="roundTrip">
+                        Round-trip
+                    </label>
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-dark" (click)="searchFlights()">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <router-outlet></router-outlet>
+</div>

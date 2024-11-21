@@ -1,0 +1,92 @@
+<div class="flights-board">
+    <div *ngIf="fetchingFlights" class="d-flex justify-content-center">
+      <div class="spinner-grow text-success mx-3 mt-5" role="status"></div>
+      <div class="spinner-grow text-success mx-3 mt-5" role="status"></div>
+      <div class="spinner-grow text-success mx-3 mt-5" role="status"></div>
+    </div>
+  
+    <div *ngIf="!fetchingFlights && flights && flights.length > 0" class="row">
+      <div class="col-3 me-3 mb-3">
+        <label class="fs-5" for="origin">Currency</label>
+        <select
+          [(ngModel)]="exchangeCurrency"
+          class="form-control form-control-solid form-control-lg"
+        >
+          <option
+            *ngFor="let currency of currencies"
+            [value]="currency.key"
+            [selected]="currency.key == actualCurrency"
+            >{{ currency.name }}</option
+          >
+        </select>
+      </div>
+    </div>
+
+    <div *ngFor="let journey of flights; let journeyIndex = index">
+      <h4 class="mt-4">Journey {{ journeyIndex + 1 }}: {{ journey.type }}</h4>
+  
+      <table
+        *ngIf="journey.flights && journey.flights.length > 0"
+        class="table table-striped shadow-sm"
+      >
+        <thead>
+          <tr>
+            <th scope="col">Flight #</th>
+            <th scope="col">Origin</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Flight carrier</th>
+            <th scope="col">Flight number</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let flight of journey.flights; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ flight.origin }}</td>
+            <td>{{ flight.destination }}</td>
+            <td>
+              <div *ngFor="let transport of flight.transport">
+                {{ transport.flightCarrier }}
+              </div>
+            </td>
+            <td>
+              <div *ngFor="let transport of flight.transport">
+                {{ transport.flightNumber }}
+              </div>
+            </td>
+            <td>{{ exhangeCurrency(flight.price) }} {{ getISOCurrency() }}</td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th scope="col">TOTAL</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">
+              {{ exhangeCurrency(journey.totalPrice) }} {{ getISOCurrency() }}
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div *ngIf="!fetchingFlights && flights && flights.length === 0">
+      <div class="d-flex justify-content-center align-items-center py-3">
+        <div class="w-25">
+          <p class="fs-4">There are no flights available.</p>
+        </div>
+      </div>
+    </div>
+  
+
+    <div *ngIf="!fetchingFlights && !flights">
+      <div class="d-flex justify-content-center align-items-center py-3">
+        <div class="w-25">
+          <p class="fs-4">An error happened.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

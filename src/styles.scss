@@ -1,0 +1,55 @@
+.info-banner {
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(90deg, rgba(0, 53, 107, 1) 0%, rgba(0, 123, 255, 1) 50%, rgba(135, 206, 235, 1) 100%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); 
+  }
+  
+  .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .developer-name {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  .social-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+
+  .link-logos {
+    color: white;
+    text-decoration: none;
+    transition: 200ms;
+    font-size: 1.5rem; 
+  }
+  
+  .link-logos:hover {
+    color: lightgray;
+  }
+
+  .info-banner .px-5 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .info-banner {
+      height: 60px;
+    }
+  
+    .banner-content, .developer-name {
+      font-size: 14px; 
+    }
+  
+    .link-logos {
+      font-size: 1.2rem; 
+    }
+  }
