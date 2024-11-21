@@ -45,26 +45,10 @@ export class FlightsBoardComponent implements OnInit {
         return;
       }
 
-      // Buscar vuelos
       this.fetchPath();
     });
   }
 
-  // fetchPath(): void {
-  //   this.fetchingFlights = true;
-  
-   
-  //   if (!this.origin || !this.destination) {
-  //     this.router.navigate(['..']);
-  //     return;
-  //   }
-  
-  //   this.flightsService.fetchJourneyPath(this.origin, this.destination, 'one-way')
-  //     .subscribe(response => {
-  //       this.fetchingFlights = false;
-  //       this.flights = response.journeys; 
-  //     });
-  // }
   fetchPath(): void {
     this.fetchingFlights = true;
   
