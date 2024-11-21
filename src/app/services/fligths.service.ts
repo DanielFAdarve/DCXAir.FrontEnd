@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { APIResponse } from '../model/APIResponse';
-import { Journey } from '../model/Journey';
 import { Observable } from 'rxjs';
 
 @Injectable({
